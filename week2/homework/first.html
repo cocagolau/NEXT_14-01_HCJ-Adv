@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<script>
+function Person() {
+	this.printInfo = function() {
+		alert(this.name + "'s info-->  addr: " + this.addr + ", cellphone: " + this.cellphone + ", height: " + this.height + ", weight: " + this.weight);
+	}
+	this.setInfo = function(name, addr, cellphone, height, weight) {
+		this.name = name;
+		this.addr = addr;
+		this.cellphone = cellphone;
+		this.height = height;
+		this.weight = weight;
+
+		return this;
+	}
+};
+
+// 객체 생성 후 정보 저장
+var dec7 = new Person().setInfo("dec7", "seoul", "010-000-0000", "180", "60");
+dec7.printInfo();
+
+// 두번째 객체 생성 후 정보 저장
+var seo = new Person().setInfo("seo", "busan", "010-111-1111", "190", "70")
+seo.printInfo();
+
+// seo의 method setInfo를 call로 실행하되 dec7의 context와 5가지의 인자를 값으로 전달
+seo.setInfo.call(dec7, "DEC7", "SEOUL", "101-111-1111", "80", "600");
+dec7.printInfo();
+
+// seo의 method setInfo를 apply로 실행하되 dec7의 context와 5가지의 데이터가 담긴 array를 인자로 전달
+seo.setInfo.apply(dec7, ["dec7", "seoul", "010-000-0000", "180", "60"]);
+dec7.printInfo();
+
+
+/*
+seo.setInfo.call(dec7 ...);
+seo.setInfo.apply(dec7, [...]); 은
+첫번째 인자로 dec7을 전달하므로 각 함수에서 this는 dec7를 가리킨다.
+
+또한 apply를 인자 데이터를 담은 배열은 전달하나
+call은 인자를 각각 값으로 전달한다.
+
+*/
+
+</script>
+</body>
+</html>
