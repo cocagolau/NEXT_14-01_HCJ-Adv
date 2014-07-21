@@ -17,6 +17,7 @@ function Person() {
 };
 
 // 객체 생성 후 정보 저장
+// 의도한 건지 모르지만 생성자를 호출한 뒤에 바로 이어서 setInfo를 부르니까 코드 보기가 좀 어렵다.
 var dec7 = new Person().setInfo("dec7", "seoul", "010-000-0000", "180", "60");
 dec7.printInfo();
 

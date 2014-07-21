@@ -17,6 +17,7 @@ var obj = {
 		var lis = document.querySelectorAll('ul > li');
 		for (var i=0; i<lis.length; ++i) {
 			var curLi = lis[i];
+                        //잘했음! 
 			curLi.addEventListener('click', this.callback.bind(this), false);
 		}
 	},
