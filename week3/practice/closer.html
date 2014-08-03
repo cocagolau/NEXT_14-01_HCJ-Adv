@@ -1,0 +1,33 @@
+<html>
+<body>
+
+<script>
+
+function execOperation (opFunc) {
+
+	return function (num1) {
+
+		return function (num2) {
+
+			return opFunc (num1, num2);
+		};
+	};
+}
+
+function add(num1, num2) {
+
+	return num1 + num2;
+}
+
+function mul(num1, num2) {
+
+	return num1 * num2;
+}
+
+console.log(execOperation(add)(3)(5));
+console.log(execOperation(mul)(3)(5));
+
+</script>
+
+</body>
+</html>

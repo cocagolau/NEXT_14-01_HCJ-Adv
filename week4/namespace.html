@@ -1,0 +1,86 @@
+<html>
+<head>
+<meta charset="utf-8" />
+</head>
+
+<body>
+<div>hello namespace</div>
+<input id="text-box" type="text"></input>
+<button id="btn">입력</button>
+<div id="greeting"></div>
+
+<script>
+
+/*
+  1. 사용법
+	자바스크립트는 함수단위 스코프를 가진다
+	함수 내부에 정의된 변수는 해당 함수가 정의된 함수 내부에서만 접근 가능하다.
+	따라서 전역공간에 특정 객체와 객체의 클로져 영역으로 접근 할 수 있는 변수를 선언하면
+	특정 모듈로 접근할 수 있는 네임스페이스처럼 사용할 수 있는 객체를 만들 수 있다.
+*/
+
+/*
+  2. 그로 인해 얻을 수 있는 장점
+	다양한 모듈을 사용하더라도 모듈의 변수들이 충돌하지 않도록 방지할 수 있다.
+	그리고 공개 / 비공개용 API를 나누어 관리할 수 있다.
+	자바스크립트 코드를 모듈별 관리할 수 있기 때문에 확장성 및 수정이 편리하다.
+*/
+
+/*
+  3. 예제 코드
+*/
+(function (window) {
+	'use strict';
+
+	var document = window.document;
+	var console = window.console;
+	var S = window.S;
+
+	S = S || {};
+
+	S.createNS = function(namespace) {
+		var parent = S;
+		var nodes = namespace.split('.');
+
+		var i = (nodes[0] === 'S' || nodes[0] === 's') ? 1 : 0;
+		for (; i<nodes.length; ++i) {
+
+			parent[nodes[i]] = parent[nodes[i]] || {};
+			parent = parent[nodes[i]];
+		}
+	}
+
+	window.S = S;
+
+
+}(this));
+
+S.createNS('S.model');
+S.createNS('S.view');
+
+
+S.model.greeting = function(text) {
+	S.view.show(text);
+}
+
+S.view.show = function(text) {
+	var el = document.querySelector('#greeting');
+
+	el.innerText = text;	
+}
+
+window.addEventListener('click', function(evt){
+	var targetEl = evt.target;
+	if (targetEl.id === 'btn') {
+		var inputEl = document.querySelector('#text-box');
+		S.model.greeting(inputEl.value);
+	}
+
+}, false);
+
+
+
+
+</script>
+</body>
+</html>

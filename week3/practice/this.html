@@ -1,0 +1,34 @@
+<html>
+<body>
+
+<script>
+
+var myFunction = {
+	/*
+	getName : function() {
+		setTimeout(function() {
+			console.log(this.phone);
+		}.bind(this), 1500);
+	},
+	*/
+	/*
+	getName : function() {
+		var that = this;
+		setTimeout(function() {
+			console.log(that.phone);
+		}, 1500);
+	},
+	*/
+	setName : function(newName) {
+		this.name = newName;
+	}
+}
+
+var myProduct = {phone : "iphone", com: "apple"}
+
+myFunction.getName.apply(myProduct);
+
+</script>
+
+</body>
+</html>

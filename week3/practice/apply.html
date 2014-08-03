@@ -1,0 +1,34 @@
+<html>
+<body>
+
+<script>
+
+var myFunc = {
+	getName: function() {
+
+		return this.name;
+	},
+	setName: function(name) {
+		this.name = name;
+	}
+};
+
+var mySNS = {
+	name: "Line"
+};
+
+var myProduct = {
+	name: "dec",
+	phone: "phone"
+};
+
+myFunc.setName.call(mySNS,mySNS.name);
+console.log(mySNS.name);
+
+console.log(myFunc.getName.call(mySNS));
+console.log(myFunc.getName.apply(myProduct));
+
+</script>
+
+</body>
+</html>
